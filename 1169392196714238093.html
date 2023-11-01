@@ -1,0 +1,39 @@
+
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; }
+            .message-group { display: flex; align-items: start; border-bottom: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+            .avatar { width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; }
+            .messages { flex-grow: 1; }
+            .author { font-weight: bold; margin-bottom: 5px; }
+            .timestamp { font-size: 0.8em; color: #888; margin-bottom: 10px; display: none; }
+            .message { background-color: #fff; padding: 10px; border-radius: 5px; margin-bottom: 5px; cursor: pointer;}
+            .message:last-child { margin-bottom: 0; }
+            .banner { background-color: #ddd; padding: 10px; text-align: center; font-size: 0.8em; color: #888; }
+        </style>
+        <script>
+            function toggleTimestamp(event) {
+                var timestamp = event.currentTarget.querySelector('.timestamp');
+                timestamp.style.display = timestamp.style.display === 'none' ? 'block' : 'none';
+            }
+        </script>
+    </head>
+    <body>
+    
+            <div class="message-group">
+                <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="Profile picture">
+                <div class="messages">
+                    <div class="author">mictony</div>
+                    <div class="timestamp">2023-11-01 21:54:03</div>
+            <div class="message" onclick="toggleTimestamp(event)"><div>w</div><div class="timestamp" style="display:none;">2023-11-01 21:54:03</div></div><div class="message" onclick="toggleTimestamp(event)"><div>e</div><div class="timestamp" style="display:none;">2023-11-01 21:54:03</div></div><div class="message" onclick="toggleTimestamp(event)"><div>e</div><div class="timestamp" style="display:none;">2023-11-01 21:54:04</div></div><div class="message" onclick="toggleTimestamp(event)"><div>e</div><div class="timestamp" style="display:none;">2023-11-01 21:54:04</div></div><div class="message" onclick="toggleTimestamp(event)"><div>e</div><div class="timestamp" style="display:none;">2023-11-01 21:54:21</div></div><img src="https://cdn.discordapp.com/attachments/1169392196714238093/1169394022066966600/Ultimate.cfg?ex=65553e0d&amp;is=6542c90d&amp;hm=91f3173dec618dc0c461f66bc8959b58ac2029d5c8d689bc3d3fdfad21f4b05d&amp;" /><img src="https://cdn.discordapp.com/attachments/1169392196714238093/1169394022666735696/51ThdJRtD6L.jpg?ex=65553e0d&amp;is=6542c90d&amp;hm=5b0a04cc32851b9277e42239aea8c30dd97c38b88b007760e2c21c95228c1b77&amp;" /><img src="https://cdn.discordapp.com/attachments/1169392196714238093/1169394023090368512/cl-tutorial-6.HEIC?ex=65553e0d&amp;is=6542c90d&amp;hm=7dd0e05610e93a1838a056e9488f546791d8baea91346f867c412241387f8a69&amp;" /></div></div>
+            <div class="message-group">
+                <img class="avatar" src="https://cdn.discordapp.com/avatars/1162854580917387475/c5c9ccf9fb56b69909ca67c9f6449b8c.png?size=1024" alt="Profile picture">
+                <div class="messages">
+                    <div class="author">starConfigs</div>
+                    <div class="timestamp">2023-11-01 21:54:35</div>
+            <div class="message" onclick="toggleTimestamp(event)"><div></div><div class="timestamp" style="display:none;">2023-11-01 21:54:35</div></div></div></div>
+    <div class="banner">This is an archived conversation.</div>
+    </body>
+    </html>
+    
