@@ -1,0 +1,39 @@
+
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; }
+            .message-group { display: flex; align-items: start; border-bottom: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+            .avatar { width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; }
+            .messages { flex-grow: 1; }
+            .author { font-weight: bold; margin-bottom: 5px; }
+            .timestamp { font-size: 0.8em; color: #888; margin-bottom: 10px; display: none; }
+            .message { background-color: #fff; padding: 10px; border-radius: 5px; margin-bottom: 5px; cursor: pointer;}
+            .message:last-child { margin-bottom: 0; }
+            .banner { background-color: #ddd; padding: 10px; text-align: center; font-size: 0.8em; color: #888; }
+        </style>
+        <script>
+            function toggleTimestamp(event) {
+                var timestamp = event.currentTarget.querySelector('.timestamp');
+                timestamp.style.display = timestamp.style.display === 'none' ? 'block' : 'none';
+            }
+        </script>
+    </head>
+    <body>
+    
+            <div class="message-group">
+                <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="Profile picture">
+                <div class="messages">
+                    <div class="author">mictony</div>
+                    <div class="timestamp">2023-11-01 21:56:16</div>
+            <div class="message" onclick="toggleTimestamp(event)"><div></div><div class="timestamp" style="display:none;">2023-11-01 21:56:16</div></div><img src="https://cdn.discordapp.com/attachments/1169394460069744660/1169394504688750632/Ultimate.cfg?ex=65553e80&amp;is=6542c980&amp;hm=b073aef3e7f83ca7aeebecf24df581488e91b2a5e238a0f7596964ce45212220&amp;" /><div class="message" onclick="toggleTimestamp(event)"><div></div><div class="timestamp" style="display:none;">2023-11-01 21:56:36</div></div><img src="https://cdn.discordapp.com/attachments/1169394460069744660/1169394591225626684/cl-tutorial-6.jpg?ex=65553e94&amp;is=6542c994&amp;hm=3d187a1f92231d091dc0f9f752025625a39fc0cd4243729eed344442340a20dd&amp;" /></div></div>
+            <div class="message-group">
+                <img class="avatar" src="https://cdn.discordapp.com/avatars/1162854580917387475/c5c9ccf9fb56b69909ca67c9f6449b8c.png?size=1024" alt="Profile picture">
+                <div class="messages">
+                    <div class="author">starConfigs</div>
+                    <div class="timestamp">2023-11-01 21:56:39</div>
+            <div class="message" onclick="toggleTimestamp(event)"><div></div><div class="timestamp" style="display:none;">2023-11-01 21:56:39</div></div></div></div>
+    <div class="banner">This is an archived conversation.</div>
+    </body>
+    </html>
+    
