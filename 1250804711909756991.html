@@ -1,0 +1,702 @@
+
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #36393f;
+                color: #dcddde;
+                padding-bottom: 70px;
+            }
+            .bot-badge {
+                background-color: #738ADB;
+                color: white;
+                padding: 2px 4px;
+                margin-left: 4px;
+                border-radius: 4px;
+                font-size: 0.75em;
+                vertical-align: middle;
+                display: inline-block;
+            }
+            .embed {
+                display: flex;
+                align-items: flex-start;
+                background-color: #2f3136; /* Darker background for embeds */
+                padding: 8px;
+                margin-bottom: 4px;
+                
+           
+            }
+            .embed-wrapper {
+                flex-grow: 1;
+                border-left: 4px solid;
+                margin-top: 5px;
+                padding-left: 8px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                padding-right: 40px;
+                max-width: 600px;
+                border-radius: 3px 0px 0px 3px;
+            }
+            .button {
+                display: inline-block;
+                padding: 0.5em 1em;
+                margin: 0.5em 0;
+                border: none;
+                border-radius: 4px;
+                font-size: 0.8em;
+                color: white;
+                cursor: pointer;
+                text-align: center;
+            }
+           .message-attachment {
+                display: flex;
+                border: 1px solid #1a1a1a;
+                border-radius: 5px;
+                align-items: center;
+                width: 400px;
+                padding: 10px 20px 20px 10px;
+                border-radius: 4px;
+                background-color: #2f3136;
+                margin-top: 5px;
+                margin-bottom:
+            }
+            .message-attachment a {
+                color: #00b0f4; /* Discord's link color */
+                text-decoration: none; /* Removes underline from links */
+            }
+
+            .attachment-icon {
+                width: 50px;  /* Adjust size as needed */
+                height: 50px; /* Adjust size as needed */
+                margin-right: 8px;
+            }
+
+            .attachment-info {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .attachment-title {
+                color: #00b0f4; /* Discord link color */
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+            .attachment-size {
+                color: #72767d; /* Discord grey text color */
+                font-size: 0.75rem;
+            }
+            .embed-color {
+                width: 4px;
+                height: 100%;
+                display: inline-block;
+
+            }
+            .embed-author-name {
+                color: #ffffff;
+            }
+            .embed-title {
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .embed-description {
+                font-size: 0.8em;
+                margin-top: 4px;
+                margin-bottom: 5px;
+            }
+            .embed-footer {
+                display: flex;
+                align-items: center;
+                margin-top: 12px;
+            }
+            .embed-footer-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 8px;
+                border-radius: 50%;
+            }
+            .embed-footer-text {
+                font-size: 0.6em;
+                color: #72767d;
+            }
+            .embed-field {
+                margin-top: 0.3em;
+                display: flex;
+                flex-direction: column; /* Change to row if you want inline fields */
+            }
+
+            .embed-field-name {
+                font-size: 0.8em;
+                font-weight: bold;
+                margin-right: 1em;
+            }
+
+            .embed-field-value {
+                font-size: 0.8em;
+                flex: 1;
+            }
+            .embed-description b {
+                font-size: 1.4em;
+                font-weight: bold;
+                display: block; /* Display as block to make it on a new line */
+            }
+
+            .timestamp {
+                color: #72767d;
+                font-size: 0.75em;
+                margin-left: 6px;
+            }
+
+            .banner {
+                background-color: #36393f;
+                padding: 10px 20px;
+                text-align: left;
+                font-size: 16px;
+                color: #ffffff;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                border-bottom: 1px solid #000000;
+                display: flex;
+                align-items: center;
+            }
+            .footer-banner {
+                background-color: #292b2f;
+                padding: 15px 20px; /* Increased padding */
+                text-align: left;
+                font-size: 16px;
+                color: #ffffff;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                box-sizing: border-box;
+                z-index: 1000;
+            }
+
+            .welcome-message {
+                color: #ffffff;
+                font-size: 30px;
+                font-weight: bold;
+                padding-top: 200px; /* Gap from the top */
+                padding-left: 20px;
+                padding-bottom: 10px;
+            }
+            
+
+            .channel-text {
+                color: #72767d;
+                font-size: 16px;
+                padding-left: 20px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #4f545c; /* Faint grey line */
+                margin-bottom: 20px; /* Add some space after the line */
+            }
+
+            .hashtag {
+                color: #72767d;
+                font-size: 20px;
+                margin-right: 8px;
+            }
+            .ticketname {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .message-group {
+                padding: 10px 20px;
+                padding-left: 20px; /* Added padding to the left */
+            }
+             .message {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 2px;
+                font-size: 0.9em;
+                transition: background-color 0.3s; /* Smooth transition for background color */
+            }
+            .message:hover {
+                background-color: #32353b; /* Slightly darker on hover */
+            }
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+            .no-avatar {
+                width: 40px;
+                height: 20px;
+                margin-right: 10px;
+            }
+            .author-name {
+                color: #ffffff;
+                margin-bottom: 3px;
+            }
+            .message-content {
+                padding-bottom: 2px; /* Spacing between messages within a group */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="banner">
+            <span class="hashtag">#</span>
+            <span class="ticketname">ticket-support-4107</span>
+        </div>
+        <div class="welcome-message">
+            Welcome to ticket-support-4107!
+        </div>
+        <div class="channel-text">
+            This is the start of the ticket-support-4107 channel.
+        </div>
+        
+        <!-- Messages go here -->
+        <!-- ... existing message loop code ... -->
+        <div class="footer-banner">
+            This archive was generated on the 16 June 2024 at 12:26:40
+        </div>
+    </body>
+    </html>
+    <div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 13:31">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1162854580917387475/c5c9ccf9fb56b69909ca67c9f6449b8c.png?size=1024" alt="starConfigs">
+                        <div>
+                            <div class="author-name">starConfigs<span class="bot-badge">BOT</span><span class="timestamp">Thursday at 13:31</span></div>
+                
+                    <div class="embed-wrapper" style="border-left-color: #3498db; background-color: #2f3136;">
+                        <div class="embed-content">
+                            <div class="embed-title">General Support Ticket</div>
+                            <div class="embed-description" style="white-space: pre-wrap;">Thank you for contacting our general support. We will get back to you as soon as possible.</div>
+                            
+                            <div class="embed-footer">
+                                <img class="embed-footer-icon" src="https://cdn.discordapp.com/avatars/1162854580917387475/c5c9ccf9fb56b69909ca67c9f6449b8c.png?size=1024" alt="Footer Icon">
+                                <span class="embed-footer-text">starConfigs • 13-06-2024 • Tickets</span>
+                            </div>
+                        </div>
+                    </div>
+                
+                        <div class="button" style="background-color: #ed5555;">
+                            <span>Close</span>
+                        </div>
+                    </div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 13:31">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/7ea3920eee277ea0fe3c751758b49325.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Thursday at 13:31</span></div>
+                <div class="message-content">umm what option is the aim assisst for apex</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 13:32">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Thursday at 13:32</span></div>
+                <div class="message-content">for mnk?</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 13:32">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/7ea3920eee277ea0fe3c751758b49325.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Thursday at 13:32</span></div>
+                <div class="message-content">yea</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 13:35">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="mictony">
+                        <div>
+                            <div class="author-name">mictony<span class="timestamp">Thursday at 13:35</span></div>
+                <div class="message-content">we have lifetime and monthly &lt;@1164303889084981361&gt;</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 13:35">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/7ea3920eee277ea0fe3c751758b49325.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Thursday at 13:35</span></div>
+                <div class="message-content">how much is lifetime and this was just a question id have to buy it tn when i get payed</div></div></div>
+                    <div class="message" data-timestamp="13:35">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">nvm i see ima just to monthly</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 15:38">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Thursday at 15:38</span></div>
+                <div class="message-content">let us know if you have any other questions</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 22:56">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/3c3ae28d6a556f0dc4ca0f54625d2c7d.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Thursday at 22:56</span></div>
+                <div class="message-content">&lt;@861214093822394368&gt;</div></div></div>
+                    <div class="message" data-timestamp="22:56">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">does the aim assist get you banned</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Thursday at 22:57">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Thursday at 22:57</span></div>
+                <div class="message-content">its not detected</div></div></div>
+                    <div class="message" data-timestamp="22:57">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">but we dont advise use on a main account</div></div></div>
+                    <div class="message" data-timestamp="22:57">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">no one has been banned for omniflow but similar apps in the past have been detected</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:37">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:37</span></div>
+                <div class="message-content">&lt;@861214093822394368&gt;</div></div></div>
+                    <div class="message" data-timestamp="13:37">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">i wanna buy</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:37">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="mictony">
+                        <div>
+                            <div class="author-name">mictony<span class="timestamp">Friday at 13:37</span></div>
+                <div class="message-content">sure, so go to our store</div></div></div>
+                    <div class="message" data-timestamp="13:38">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">and buy either a monthly or lifetime key</div></div></div>
+                    <div class="message" data-timestamp="13:38">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">then we can help you</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:38">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:38</span></div>
+                <div class="message-content">ok</div></div></div>
+                    <div class="message" data-timestamp="13:38">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">so which is just the aim</div></div></div>
+                    <div class="message" data-timestamp="13:38">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">not aim</div></div></div>
+                    <div class="message" data-timestamp="13:38">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">movement</div></div></div>
+                    <div class="message" data-timestamp="13:43">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">&lt;@861214093822394368&gt;</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:44">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="mictony">
+                        <div>
+                            <div class="author-name">mictony<span class="timestamp">Friday at 13:44</span></div>
+                <div class="message-content">Omniflow</div></div></div>
+                    <div class="message" data-timestamp="13:44">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">https://ultimateroller.store/products/omni-flow</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:49">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:49</span></div>
+                <div class="message-content">&lt;@861214093822394368&gt;</div></div></div>
+                    <div class="message" data-timestamp="13:49">
+                        <div class="no-avatar"></div>
+                        <div>
+                
+                    <div class="message-attachment">
+                        <img class="attachment-icon" src="https://cdn-icons-png.flaticon.com/512/2246/2246713.png" alt="File">
+                        <div class="attachment-info">
+                            <a href="https://cdn.discordapp.com/attachments/1250804711909756991/1251171553446727740/image.png?ex=666d9bcf&amp;is=666c4a4f&amp;hm=c9ff47d55815c95d2ec520acd38d6572cc28c8a9050b2a7c40ae87c9e78d7c8d&amp;" target="_blank">image.png</a>
+                            <div class="attachment-size">0.04 KB</div>
+                        </div>
+                    </div>
+                <div class="message-content"></div></div></div>
+                    <div class="message" data-timestamp="13:49">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">now what</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:49">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 13:49</span></div>
+                <div class="message-content">thank you</div></div></div>
+                    <div class="message" data-timestamp="13:49">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">if you are going to use omniflow for apex we do advise using an alt account as although its not detected similar apps in the past have been</div></div></div>
+                    <div class="message" data-timestamp="13:50">
+                        <div class="no-avatar"></div>
+                        <div>
+                
+                    <div class="message-attachment">
+                        <img class="attachment-icon" src="https://cdn-icons-png.flaticon.com/512/2246/2246713.png" alt="File">
+                        <div class="attachment-info">
+                            <a href="https://cdn.discordapp.com/attachments/1250804711909756991/1251171799886991432/ReadMeApp_copy_2.txt?ex=666d9c0a&amp;is=666c4a8a&amp;hm=b4bf2d32983b74c844cba4cc9dc99f2a33f4ee9925ae4acbc0719caf5fb325e4&amp;" target="_blank">ReadMeApp_copy_2.txt</a>
+                            <div class="attachment-size">0.04 KB</div>
+                        </div>
+                    </div>
+                <div class="message-content">please follow this</div></div></div>
+                    <div class="message" data-timestamp="13:50">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">eLxNj-113cB-TGGbA-NpeX6 this is your key</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:50">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:50</span></div>
+                <div class="message-content">this is the movement right</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:51">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 13:51</span></div>
+                <div class="message-content">no</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:51">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:51</span></div>
+                <div class="message-content">i wanted the movemnt</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:51">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 13:51</span></div>
+                <div class="message-content">you bought the mnk aim assist</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:52">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:52</span></div>
+                <div class="message-content">wd</div></div></div>
+                    <div class="message" data-timestamp="13:52">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">can i switch it i havent used key</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:53">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 13:53</span></div>
+                <div class="message-content">movement for mnk or controller?</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:53">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:53</span></div>
+                <div class="message-content">mnk</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:55">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="mictony">
+                        <div>
+                            <div class="author-name">mictony<span class="timestamp">Friday at 13:55</span></div>
+                <div class="message-content">&lt;@861214093822394368&gt;</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:56">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 13:56</span></div>
+                <div class="message-content">?</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 13:59">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 13:59</span></div>
+                <div class="message-content">ok you would have to pay the difference + 10%</div></div></div>
+                    <div class="message" data-timestamp="13:59">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">if you want the movement</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:01">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 14:01</span></div>
+                <div class="message-content">bru</div></div></div>
+                    <div class="message" data-timestamp="14:01">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">you dont do refunds</div></div></div>
+                    <div class="message" data-timestamp="14:01">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">?\</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:02">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 14:02</span></div>
+                <div class="message-content">we do not</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:04">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 14:04</span></div>
+                <div class="message-content">i said i wanted the movement and you directed me to the other stuff</div></div></div>
+                    <div class="message" data-timestamp="14:04">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">come on</div></div></div>
+                    <div class="message" data-timestamp="14:04">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">thats all i have</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:11">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 14:11</span></div>
+                <div class="message-content">what you asked about aim assist?</div></div></div>
+                    <div class="message" data-timestamp="14:11">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">oh not me</div></div></div>
+                    <div class="message" data-timestamp="14:11">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">&lt;@861214093822394368&gt;</div></div></div>
+                    <div class="message" data-timestamp="14:11">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">cant read</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:11">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 14:11</span></div>
+                <div class="message-content">That was yesterday but before i bought look what i said</div></div></div>
+                    <div class="message" data-timestamp="14:12">
+                        <div class="no-avatar"></div>
+                        <div>
+                
+                    <div class="message-attachment">
+                        <img class="attachment-icon" src="https://cdn-icons-png.flaticon.com/512/2246/2246713.png" alt="File">
+                        <div class="attachment-info">
+                            <a href="https://cdn.discordapp.com/attachments/1250804711909756991/1251177387530518653/image.png?ex=666da13e&amp;is=666c4fbe&amp;hm=1680cbad83f4198968b754aa1f64bf87ca0ad06e4ab149049e70fff49ce3bfeb&amp;" target="_blank">image.png</a>
+                            <div class="attachment-size">0.04 KB</div>
+                        </div>
+                    </div>
+                <div class="message-content">S</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:12">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="ultimateroller">
+                        <div>
+                            <div class="author-name">ultimateroller<span class="timestamp">Friday at 14:12</span></div>
+                <div class="message-content">I see</div></div></div>
+                    <div class="message" data-timestamp="14:12">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">in that case</div></div></div>
+                    <div class="message" data-timestamp="14:12">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">you can pay the difference</div></div></div>
+                    <div class="message" data-timestamp="14:12">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">&lt;#1226642980815765554&gt; of the movement package</div></div></div>
+                    <div class="message" data-timestamp="14:12">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">no extra fee</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:14">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="mictony">
+                        <div>
+                            <div class="author-name">mictony<span class="timestamp">Friday at 14:14</span></div>
+                <div class="message-content">Sorry about that</div></div></div>
+                    <div class="message" data-timestamp="14:14">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">yeah let me know if you want to do that and ill send you a link - or if you just want a refund (will take 3-5 business days)</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:34">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 14:34</span></div>
+                <div class="message-content">refund</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:39">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="mictony">
+                        <div>
+                            <div class="author-name">mictony<span class="timestamp">Friday at 14:39</span></div>
+                <div class="message-content">Ok</div></div></div>
+                    <div class="message" data-timestamp="14:42">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">Sorry I just double checked, it will take 10 business days (so around 2 weeks) - you sure you want to go with the refund? if you still want to get the movement, you can pay the difference</div></div></div>
+                    <div class="message" data-timestamp="14:42">
+                        <div class="no-avatar"></div>
+                        <div>
+                <div class="message-content">just confirm with us</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:48">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1164303889084981361/35746ed409b9bd0bfda6031768802be9.png?size=1024" alt="u8bz_">
+                        <div>
+                            <div class="author-name">u8bz_<span class="timestamp">Friday at 14:48</span></div>
+                <div class="message-content">ill tkae a refund</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Friday at 14:56">
+                        <img class="avatar" src="https://i.pinimg.com/originals/70/a6/08/70a60868bcef89d9bc93c7693af1481e.jpg" alt="mictony">
+                        <div>
+                            <div class="author-name">mictony<span class="timestamp">Friday at 14:56</span></div>
+                <div class="message-content">done</div></div></div></div><div class="message-group">
+                    <div class="message" data-timestamp="Today at 12:26">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/1162854580917387475/c5c9ccf9fb56b69909ca67c9f6449b8c.png?size=1024" alt="starConfigs">
+                        <div>
+                            <div class="author-name">starConfigs<span class="bot-badge">BOT</span><span class="timestamp">Today at 12:26</span></div>
+                
+                    <div class="embed-wrapper" style="border-left-color: #e74c3c; background-color: #2f3136;">
+                        <div class="embed-content">
+                            <div class="embed-title">ultimateroller</div>
+                            <div class="embed-description" style="white-space: pre-wrap;"><span style="font-weight: bold; font-size: 1.4em;">Close Confirmation</span></div>
+                            
+                            <div class="embed-field" style="flex: 1;">
+                                <div class="embed-field-name"></div>
+                                <div class="embed-field-value">Please confirm that you want to close this ticket</div>
+                            </div>
+                        
+                            <div class="embed-footer">
+                                <img class="embed-footer-icon" src="https://cdn.discordapp.com/avatars/1162854580917387475/c5c9ccf9fb56b69909ca67c9f6449b8c.png?size=1024" alt="Footer Icon">
+                                <span class="embed-footer-text">starConfigs • 16-06-2024 • Tickets</span>
+                            </div>
+                        </div>
+                    </div>
+                
+                        <div class="button" style="background-color: #ed5555;">
+                            <span>Confirm</span>
+                        </div>
+                    </div></div></div>
+        <div class="footer-banner">
+            This archive was generated on the 16 June 2024 at 12:26:40
+        </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Script started.');
+            // Function to create a timestamp element
+            function createTimeElement(timestamp) {
+                console.log('Creating time element for timestamp:', timestamp);
+                var timeElement = document.createElement('div');
+                timeElement.textContent = timestamp;
+                timeElement.style.color = '#72767d'; // Grey color
+                timeElement.style.fontSize = '0.7em'; // Smaller text
+                timeElement.className = 'temp-timestamp'; // Add a class for easy identification
+                return timeElement;
+            }
+
+            // Get all message elements
+            var messages = document.querySelectorAll('.message');
+            console.log('Found messages:', messages.length);
+
+            // Add hover event listeners to each message
+            messages.forEach(function(message) {
+                message.addEventListener('mouseenter', function() {
+                    console.log('Mouse enter:', this);
+                    // Only proceed if there is a 'no-avatar' div (for grouped messages without an author's avatar)
+                    var noAvatarDiv = this.querySelector('.no-avatar');
+                    if (noAvatarDiv) {
+                        console.log('Found no-avatar div.');
+                        // Get the timestamp from the data attribute
+                        var timestamp = this.getAttribute('data-timestamp');
+                        console.log('Timestamp from data attribute:', timestamp);
+                        if (timestamp) { // Ensure the timestamp is not null
+                            // Create the timestamp element and insert it inside the no-avatar div
+                            var timeElement = createTimeElement(timestamp);
+                            noAvatarDiv.appendChild(timeElement); // Add the timeElement inside noAvatarDiv
+                        } else {
+                            console.log('No timestamp data attribute found.');
+                        }
+                    }
+                });
+
+                message.addEventListener('mouseleave', function() {
+                    console.log('Mouse leave:', this);
+                    // Remove the timestamp element when not hovering
+                    var tempTimestamp = this.querySelector('.temp-timestamp');
+                    if (tempTimestamp) {
+                        console.log('Removing time element.');
+                        tempTimestamp.parentNode.removeChild(tempTimestamp);
+                    }
+                });
+            });
+        });
+        </script>
+
+    </body>
+    </html>
+    
